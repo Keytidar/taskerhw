@@ -36,7 +36,6 @@
   src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
   defer
   ></script>
-  <script src="map-init.js" defer></script>
 
   </head>
   <body>
@@ -50,13 +49,19 @@
         видаляти завдання при кліку на них.
       </h3>
     </div> -->
-    <div id="modal" class="modal hidden"></div>
+    <div id="modal" class="modal hidden">
+      <div class="modal_header">
+        <h1 id="modal-heading"></h1>
+        <span class="modal_time" id="modal-time"></span>
+      </div>
+      <p id="modal-p"></p>
+      <div id="map2"></div>
+    </div>
     <div id="modal-map" class="modal hidden">
       <div id="map"></div>
     </div>
     <div class="tasks_field" id="tasks-field">
       <ul id="tasklist" class="tasks_ul">
-        <li class="task_Li"><span class="task_text">Neon shadows flicker  code bleeds in digital veins</span><span class="task_time">2025-07-24 22:27</span><button class="remove_btn"></button></li>
       </ul>
       <div id="errors_list">
         <ul></ul>
