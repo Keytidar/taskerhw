@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TASK-DRIVE</title>
+    <link rel="icon" href="images/favicon.ico" />
+    <script src="index.js" defer></script>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Leaflet CSS -->
+  <link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  />
+
+<!-- Leaflet JS -->
+  <script
+  src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+  defer
+  ></script>
+  <script src="map-init.js" defer></script>
+
+  </head>
+  <body>
+    <!-- <div>
+      <h1>HW 12.3 TODO лист</h1>
+      <h3>
+        Створіть HTML-сторінку, яка містить список завдань (to-do list) з
+        можливістю додавання нових завдань.<br />
+        Ваше ціль - використовуючи делегування подій, створити обробник подій
+        для списку завдань, який дозволить<br />
+        видаляти завдання при кліку на них.
+      </h3>
+    </div> -->
+    <div id="modal" class="modal hidden">
+    <div id="modal-map" class="modal hidden">
+      <div id="map"></div>
+    </div>
+    
+    </div>
+    <div class="tasks_field" id="tasks-field">
+      <ul id="tasklist" class="tasks_ul">
+        <li class="task_Li"><span class="task_text">Neon shadows flicker  code bleeds in digital veins</span><span class="task_time">2025-07-24 22:27</span><button class="remove_btn"></button></li>
+      </ul>
+      <div id="errors_list">
+        <ul></ul>
+      </div>
+      <form action="">
+        <div class="date_input">
+          <input type="date" id="date-input" />
+          <input type="time" id="time-input" />
+        </div>
+        <div class="task_input">
+          <input
+            type="text"
+            id="heading"
+            name="heading"
+            placeholder="Task heading"
+            minlength="1"
+            maxlength="50"
+          />
+          <textarea id="task" name="task" placeholder="Your task:"></textarea>
+        </div>
+        <div class="task_extra">
+          <button id="map-btn" type="button" class="btn_style"></button>
+          <input type="color" id="color-picker" value="#FFFFFF"/>
+        </div>
+        <button type="submit" id="submit-btn" class="btn_style">Submit</button>
+      </form>
+    </div>
+  </body>
+</html>

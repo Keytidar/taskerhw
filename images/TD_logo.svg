@@ -1,0 +1,18 @@
+<svg width="160" height="160" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Основной символ -->
+  <path d="M80 20L120 60V100L80 140L40 100V60L80 20Z" stroke="#111" stroke-width="4"/>
+  
+  <!-- Внутренние элементы -->
+  <path d="M80 40L60 60H50L80 90L110 60H100L80 40Z" stroke="#444" stroke-width="2"/>
+  <line x1="80" y1="20" x2="80" y2="140" stroke="#111" stroke-width="1" stroke-dasharray="3 2"/>
+  <line x1="40" y1="80" x2="120" y2="80" stroke="#111" stroke-width="1" stroke-dasharray="3 2"/>
+  
+  <!-- Текст с обводкой (уменьшен до 14px) -->
+  <text x="80" y="130" font-family="'Arial Black', sans-serif" font-size="14" font-weight="900" 
+        text-anchor="middle" stroke="#111" stroke-width="6" stroke-linejoin="round">TASK-DRIVE</text>
+  <text x="80" y="130" font-family="'Arial Black', sans-serif" font-size="14" font-weight="900" 
+        text-anchor="middle" fill="#fff">TASK-DRIVE</text>
+  
+  <!-- Доп. код (уменьшен) -->
+  <text x="80" y="150" font-family="'Courier New', monospace" font-size="9" text-anchor="middle" fill="#555">v4.7.11</text>
+</svg>

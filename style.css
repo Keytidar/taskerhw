@@ -1,0 +1,230 @@
+* {
+  font-family: 'Jost';
+}
+
+input::-webkit-calendar-picker-indicator {
+  display: none;
+  -webkit-appearance: none;
+}
+
+body {
+  background-color: #121212;
+  color: #f5f5f5;
+  font-family: 'Raleway';
+}
+
+textarea {
+  border: 1px solid gray;
+  background-color: #1e1e1e;
+  resize: none;
+  font-size: 1.2rem;
+  color: white;
+}
+
+#map-btn {
+  background-image: url(images/mapmarkersvg.svg);
+  background-repeat: no-repeat;
+  background-size: 32px;
+  background-position: center;
+}
+
+.task_extra {
+  width: 100%;
+  min-height: 4rem;
+  display: flex;
+  flex-direction: row;
+}
+
+.task_extra > * {
+  flex: 1;
+  min-width: 0;
+}
+
+button {
+  border: 1px solid gray;
+  background-color: #1e1e1e;
+  cursor: pointer;
+}
+
+.btn_style {
+  border: 1px solid gray;
+  background-color: #1e1e1e;
+  min-height: 2rem;
+  color: white;
+  height: 4rem;
+  font-size: 2rem;
+}
+
+#submit-btn {
+  width: 100%;
+}
+
+form * {
+  cursor: pointer;
+}
+
+form *:hover, button:hover {
+  box-shadow: 0px -1px 41px -20px rgba(255, 255, 255, 0.75) inset;
+  -webkit-box-shadow: 0px -1px 41px -20px rgba(255, 255, 255, 0.75) inset;
+  -moz-box-shadow: 0px -1px 41px -20px rgba(255, 255, 255, 0.75) inset;
+  transition: transform 0.5s ease;
+}
+
+.date_input {
+  display: flex;
+  justify-content: center;
+}
+
+.date_input input {
+  flex: 1;
+  font-family: 'Orbitron';
+  font-size: 1.3rem;
+  text-align: center;
+}
+
+.tasks_ul {
+  display: flex;
+  flex-direction: column;
+  background-color: #1e1e1e;
+  gap: 1rem;
+  border: 1px solid gray;
+  padding: 1rem 0.5rem;
+  width: 100%;
+  height: 20rem;
+  overflow: scroll;
+}
+
+.tasks_ul::-webkit-scrollbar {
+  display: none;
+}
+
+#errors_list {
+  display: flex;
+  justify-content: center;
+  min-width: 100%;
+  min-height: auto;
+}
+
+#errors_list ul {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  color: #ff0033;
+}
+
+#errors_list li {
+  outline: 1px solid #ff0033;
+  list-style: none;
+  font-size: 1.2rem;
+  padding: 0.3rem;
+}
+
+.tasks_li {
+  padding: 0.5rem;
+  border: 2px solid white;
+}
+
+.tasks_li:hover {
+  transition: gray 0.5s linear 1s;
+}
+
+#heading {
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+input {
+  outline: none;
+  min-height: 4rem;
+  border: 1px solid gray;
+  background-color: #1e1e1e;
+  color: white;
+}
+
+.tasks_field {
+  max-width: 75%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.task_input {
+  display: flex;
+  flex-direction: column;
+}
+
+#task {
+  min-height: 7rem;
+}
+
+form {
+  width: 80%;
+  max-width: 80vw;
+}
+
+.task_text {
+  font-size: 2rem;
+  flex: 1 1 0;
+  cursor: pointer;
+}
+
+.task_Li {
+  align-items: center;
+  display: flex;
+  font-size: 1.2rem;
+  background-color: #27cfe679;
+  list-style-type: none;
+  padding: 0.5rem 0.8rem;
+  gap: 0.8rem;
+}
+
+.task_Li > * {
+}
+
+.task_time {
+  flex: 0 0 7.5rem;
+  text-align: center;
+  outline: 1px solid white;
+}
+
+.remove_btn {
+  display: flex;
+  align-items: center;
+  flex: 0 0 2.5rem;
+  max-width: 20%;
+  width: 2.5rem;
+  height: 2.5rem;
+  background-image: url(images/trashcansvg.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 80%;
+}
+
+.placeholder_empty {
+  background-image: url(images/TD_logo.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 20rem;
+}
+
+#map {
+  width: 100%;
+  height: 100%;
+}
+
+.modal {
+  position: fixed;
+  top: 48%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #1e1e1e;
+  border: 1px solid gray;
+  width: 80vw;
+  height: 90vh;
+}
+
+.hidden {
+  display: none;
+}
