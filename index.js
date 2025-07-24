@@ -12,17 +12,25 @@ const taskTextCls = document.getElementsByClassName("task_text");
 
 let map;
 
-for (let el of taskTextCls) {
-  el.addEventListener('click', () => {
-    modal.classList.toggle('hidden')
-  })
-}
+tasksList.addEventListener('click', (event) => {
+  event.stopPropagation();
+  if (event.target.classList.contains('task_text')) {
+    modal.classList.remove("hidden");
+  }
+})
+
+document.addEventListener('click', (event) => {
+  if (!modal.classList.contains('hidden') && !modal.contains(event.target)) {
+    modal.classList.add("hidden");
+  }
+})
 
 document.addEventListener('click', (event) => {
   if (!modalMap.classList.contains("hidden") && !modalMap.contains(event.target)) {
     modalMap.classList.add("hidden");
   }
 })
+
 
 
 let timeNow = new Date();
