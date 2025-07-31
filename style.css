@@ -1,5 +1,6 @@
 * {
   font-family: 'Jost';
+  box-sizing: border-box;
 }
 
 input::-webkit-calendar-picker-indicator {
@@ -40,7 +41,7 @@ textarea {
   min-width: 0;
 }
 
-button {
+button, label {
   border: 1px solid gray;
   background-color: #1e1e1e;
   cursor: pointer;
@@ -64,7 +65,8 @@ form * {
 }
 
 form *:hover,
-button:hover {
+button:hover,
+.task_Li label:hover {
   box-shadow: 0px -1px 41px -20px rgba(255, 255, 255, 0.75) inset;
   -webkit-box-shadow: 0px -1px 41px -20px rgba(255, 255, 255, 0.75) inset;
   -moz-box-shadow: 0px -1px 41px -20px rgba(255, 255, 255, 0.75) inset;
@@ -179,9 +181,18 @@ form {
   list-style-type: none;
   padding: 0.5rem 0.8rem;
   gap: 0.8rem;
+  transition: opacity 1s ease-in-out;
 }
 
 .task_Li > * {
+}
+
+.task_Li button, label {
+  align-items: center;
+  flex: 0 0 2.5rem;
+  max-width: 20%;
+  width: 2.5rem;
+  height: 2.5rem;
 }
 
 .task_time {
@@ -191,16 +202,30 @@ form {
 }
 
 .remove_btn {
-  display: flex;
-  align-items: center;
-  flex: 0 0 2.5rem;
-  max-width: 20%;
-  width: 2.5rem;
-  height: 2.5rem;
   background-image: url(images/trashcansvg.svg);
   background-repeat: no-repeat;
   background-position: center;
   background-size: 80%;
+}
+
+.isDone_checkbox {
+  background-image: none;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 80%;
+  transition: background-image ;
+}
+
+.task_Li input[type="checkbox"]:checked + .isDone_checkbox {
+  background-image: url(images/checkbox_checked.svg);
+}
+
+.task_Li:has(input[type="checkbox"]:checked) .task_text {
+  text-decoration: line-through;
+}
+
+.task_Li:has(input[type="checkbox"]:checked) {
+  opacity: 50%;
 }
 
 .placeholder_empty {
@@ -234,6 +259,7 @@ form {
   width: 80vw;
   height: 90vh;
   overflow: scroll;
+  z-index: 1000;
 }
 
 #modal-p {

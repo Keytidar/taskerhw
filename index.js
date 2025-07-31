@@ -18,15 +18,71 @@ const modalP = document.getElementById('modal-p');
 let map;
 let map2;
 
+
+const createCustomCheckbox = (checkboxId, labelStyle, currentObj) => {
+  const checkbox = document.createElement('Input');
+  const label = document.createElement('label');
+  checkbox.type = 'checkbox';
+  if (currentObj) {
+    currentObj.isDone ? checkbox.checked = true : checkbox.checked = false;
+  }
+  checkbox.hidden = true;
+  checkbox.id = checkboxId;
+  label.htmlFor = checkboxId;
+  label.classList.add(labelStyle);
+  return [checkbox, label];
+}
+
+
+const createLi = (currentObj, toAppend) => {
+  const listItem = document.createElement('li');
+  const spanItem = document.createElement('span');
+  const spanItem2 = document.createElement('span');
+  const removeBtn = document.createElement('button');
+
+  listItem.classList.add('task_Li');
+  listItem.style.backgroundColor = currentObj.color;
+  listItem.dataset.id = currentObj.id;
+
+  spanItem2.textContent = currentObj.heading;
+  spanItem2.classList.add('task_text');
+
+  spanItem.textContent = currentObj.dateTime.replace('T', ' ');
+  spanItem.classList.add('task_time');
+
+  listItem.appendChild(spanItem2);
+  listItem.appendChild(spanItem);
+  listItem.appendChild(removeBtn);
+
+  createCustomCheckbox('chbx-'+ currentObj.id, 'isDone_checkbox', currentObj).forEach((el) => {
+    listItem.appendChild(el)
+  });
+
+  removeBtn.classList.add('remove_btn');
+
+  if (toAppend) {
+    toAppend.appendChild(listItem);
+  }
+
+  return listItem;
+};
+
+tasksList.addEventListener('change', (event) => {
+  if (event.target.type === 'checkbox') {
+    const id = event.target.id.slice(5,);
+    tasksInfoObjs[id].isDone = !tasksInfoObjs[id].isDone;
+    localStorage.setItem('tasksSavedLocal', JSON.stringify(tasksInfoObjs));
+  }
+})
+
 tasksList.addEventListener('click', (event) => {
   event.stopPropagation();
   if (event.target.classList.contains('task_text')) {
     modal.classList.remove('hidden');
     const idTarget = event.target.closest('li').dataset.id;
     console.log(idTarget);
-    const currentObjectOfClick = tasksInfoObjs.find(
-      (obj) => obj.id === idTarget
-    );
+    console.log(tasksInfoObjs);
+    const currentObjectOfClick = tasksInfoObjs[idTarget];
     noOpacityColor = currentObjectOfClick.color.replace('0.4', '1');
     modal.style.borderColor = noOpacityColor;
     modalHeading.textContent = currentObjectOfClick.heading;
@@ -53,25 +109,26 @@ tasksList.addEventListener('click', (event) => {
   }
 
   if (event.target.classList.contains('remove_btn')) {
-    event.target.closest('li')?.remove();
+    const closestLi = event.target.closest('li');
+    closestLi?.remove();
+    delete tasksInfoObjs[closestLi.dataset.id];
+    console.log(tasksInfoObjs);
+    localStorage.setItem('tasksSavedLocal', JSON.stringify(tasksInfoObjs));
     emptyListBgFuncs.check();
   }
 });
 
 document.addEventListener('click', (event) => {
-  if (!modal.classList.contains('hidden') && !modal.contains(event.target)) {
-    modal.classList.add('hidden');
-  }
+  [modal, modalMap].forEach((modaLel) => {
+    if (
+      !modaLel.classList.contains('hidden') &&
+      !modaLel.contains(event.target)
+    ) {
+      modaLel.classList.add('hidden');
+    }
+  });
 });
 
-document.addEventListener('click', (event) => {
-  if (
-    !modalMap.classList.contains('hidden') &&
-    !modalMap.contains(event.target)
-  ) {
-    modalMap.classList.add('hidden');
-  }
-});
 
 let timeNow = new Date();
 console.log(timeNow);
@@ -147,7 +204,14 @@ const generateRandomId = (length = 8) => {
     .substring(2, length + 2);
 };
 
-const tasksInfoObjs = [];
+let tasksInfoObjs = {};
+const savedTasks = localStorage.getItem('tasksSavedLocal');
+if (savedTasks) {
+  tasksInfoObjs = JSON.parse(savedTasks);
+  Object.values(tasksInfoObjs).forEach((el) => {
+    createLi(el, tasksList);
+  });
+}
 
 emptyListBgFuncs.check();
 
@@ -158,10 +222,6 @@ document.querySelector('form').addEventListener('submit', (event) => {
   event.preventDefault();
   const headingValue = heading.value.trim();
   const timeCombined = `${dateField.value}T${timeField.value}`;
-  const listItem = document.createElement('li');
-  const spanItem = document.createElement('span');
-  const spanItem2 = document.createElement('span');
-  const btn = document.createElement('button');
   const now = new Date();
   let errorsArray = [];
   if (new Date(timeCombined) < now) {
@@ -180,11 +240,12 @@ document.querySelector('form').addEventListener('submit', (event) => {
   } else {
     const randomId = generateRandomId();
     const currentObj = {
-      id: randomId,
       dateTime: timeCombined,
       heading: heading.value.trim(),
       textArea: taskArea.value.trim(),
       color: hexToRgba40(document.getElementById('color-picker').value),
+      id: randomId,
+      isDone: false
     };
     if (coords) {
       currentObj.location = [coords.lat, coords.lng];
@@ -192,29 +253,14 @@ document.querySelector('form').addEventListener('submit', (event) => {
       currentObj.location = null;
     }
 
-    tasksInfoObjs.push(currentObj);
+    tasksInfoObjs[randomId] = currentObj;
+    localStorage.setItem('tasksSavedLocal', JSON.stringify(tasksInfoObjs));
     console.log(tasksInfoObjs);
-
-    listItem.classList.add('task_Li');
-    listItem.style.backgroundColor = currentObj.color;
-    listItem.dataset.id = currentObj.id;
-
-    btn.classList.add('remove_btn');
-
-    spanItem2.textContent = currentObj.heading;
-    spanItem2.classList.add('task_text');
-
-    spanItem.textContent = currentObj.dateTime.replace('T', ' ');
-    spanItem.classList.add('task_time');
-
-    listItem.appendChild(spanItem2);
-    listItem.appendChild(spanItem);
-    listItem.appendChild(btn);
-
-    tasksList.appendChild(listItem);
+    createLi(currentObj, tasksList);
     emptyListBgFuncs.check();
 
     document.querySelector('form').reset();
+    coords = null;
     errorUl.innerHTML = '';
 
     dateField.value = timeNow.slice(0, 10);
